@@ -1,0 +1,19 @@
+{
+  "description": "A small commandline php application that generates a random image",
+  "version": "0.0.1",
+  "type": "project",
+  "readme": "../README.md",
+  "license": "MIT",
+  "require": {
+    "php": "^7.4",
+    "league/climate": "^3.5"
+  },
+  "autoload": {
+    "psr-4": {"": "src/"}
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.15",
+    "phpunit/phpunit": "^8.2",
+    "phpstan/phpstan": "^0.11.12"
+  }
+}
