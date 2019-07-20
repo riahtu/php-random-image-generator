@@ -14,4 +14,4 @@ $loader->load('services.yml', 'yml');
 
 $app = $containerBuilder->get('app.random_image_project');
 
-$app->generate(1200, 900);
+$app->generate(600, 600);

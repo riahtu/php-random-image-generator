@@ -3,6 +3,7 @@
 namespace App\Utils;
 
 use App\Entity\GeneratedImage;
+use Nette\NotImplementedException;
 use Symfony\Component\Filesystem\Filesystem;
 
 class SaveHandler
@@ -33,17 +34,17 @@ class SaveHandler
     {
         imagepng(
             $image->getResource(),
-            $this->getFullPath($image->getFileName() . '.' . $image->getFileType())
+            $this->getFullPath($image->getFileName() . '.png')
         );
     }
 
-//    /**
-//     * @param GeneratedImage $image
-//     */
-//    public function save(GeneratedImage $image): void
-//    {
-//
-//    }
+    /**
+     * @param GeneratedImage $image
+     */
+    public function save(GeneratedImage $image): void
+    {
+        throw new NotImplementedException("Generic save not implemented yet");
+    }
 
     /**
      * @param string $fileName
