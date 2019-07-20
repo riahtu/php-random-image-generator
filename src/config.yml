@@ -1,9 +1,10 @@
 parameters:
   app.output.prefix: "%color.lcyan%<%color.lblue%[%color.cyan%"
-  app.output.suffix: ""
+  app.output.suffix: "%color.white%"
   app.output.time_separator: "%color.lblue%]%color.lcyan%> %color.white%"
   app.output.time_format: "H:i:s"
   app.save.base_path: "/app/out"
+  app.save.prefix: "generated_image_"
 
   color.black: "\e[0;30m"
   color.dgrey: "\e[1;30m"

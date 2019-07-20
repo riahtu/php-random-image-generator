@@ -2,6 +2,7 @@
 
 namespace App\Utils;
 
+use App\Entity\GeneratedImage;
 use Symfony\Component\Filesystem\Filesystem;
 
 class SaveHandler
@@ -26,11 +27,30 @@ class SaveHandler
     }
 
     /**
-     * @param $image
-     * @param string $fileName
+     * @param GeneratedImage $image
      */
-    public function savePng($image, string $fileName)
+    public function savePng(GeneratedImage $image): void
     {
-        imagepng($image, $this->basePath . "/$fileName.png");
+        imagepng(
+            $image->getResource(),
+            $this->getFullPath($image->getFileName() . '.' . $image->getFileType())
+        );
+    }
+
+//    /**
+//     * @param GeneratedImage $image
+//     */
+//    public function save(GeneratedImage $image): void
+//    {
+//
+//    }
+
+    /**
+     * @param string $fileName
+     * @return string
+     */
+    protected function getFullPath(string $fileName): string
+    {
+        return $this->basePath . DIRECTORY_SEPARATOR . $fileName;
     }
 }

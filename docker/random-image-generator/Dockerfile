@@ -9,3 +9,5 @@ RUN apk add --no-cache \
     && docker-php-ext-install gd
 
 USER php
+
+# TODO: Add labels

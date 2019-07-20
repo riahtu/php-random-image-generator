@@ -14,3 +14,6 @@ WORKDIR /app
 USER php
 
 ENTRYPOINT ["/usr/local/bin/php"]
+
+# TODO: Add labels
+

@@ -4,8 +4,8 @@ namespace App\Utils;
 
 class OutputHandler
 {
-    const BR = "\n\r";
-
+    /** @var Clock $clock */
+    protected Clock $clock;
     /** @var string $outputPrefix */
     protected string $outputPrefix;
     /** @var string $outputSuffix */
@@ -16,17 +16,20 @@ class OutputHandler
     protected string $timeSeparator;
 
     /**
+     * @param Clock $clock
      * @param string $outputPrefix
      * @param string $outputSuffix
      * @param string $timeFormat
      * @param string $timeSeparator
      */
     public function __construct(
+        Clock $clock,
         string $outputPrefix = "",
         string $outputSuffix = "",
         string $timeFormat = "H:i:s",
         string $timeSeparator = ""
     ) {
+        $this->clock = $clock;
         $this->outputPrefix = $outputPrefix;
         $this->outputSuffix = $outputSuffix;
         $this->timeFormat = $timeFormat;
@@ -39,7 +42,7 @@ class OutputHandler
      */
     public function outputLine(string $line): void
     {
-        echo $this->getFormattedLine(Color::White . $line) . self::BR;
+        echo $this->getFormattedLine($line) . PHP_EOL;
     }
 
     /**
@@ -48,7 +51,7 @@ class OutputHandler
      */
     public function outputSuccess(string $line): void
     {
-        echo $this->getFormattedLine(Color::LGreen . $line) . self::BR;
+        echo $this->getFormattedLine(Color::LGreen . $line) . PHP_EOL;
     }
 
     /**
@@ -57,7 +60,7 @@ class OutputHandler
      */
     public function outputError(string $error): void
     {
-        echo $this->getFormattedLine(Color::Red . $error) . self::BR;
+        echo $this->getFormattedLine(Color::Red . $error) . PHP_EOL;
     }
 
     /**
@@ -67,7 +70,7 @@ class OutputHandler
      */
     protected function getFormattedLine(string $line): string
     {
-        return $this->outputPrefix . (new \DateTime())->format($this->timeFormat)
-            . $this->timeSeparator . $line . $this->outputSuffix;
+        return $this->outputPrefix . $this->clock->getDateTime()->format($this->timeFormat)
+            . $this->timeSeparator . $line . $this->outputSuffix . Color::White;
     }
 }
