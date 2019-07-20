@@ -6,7 +6,9 @@
   "license": "MIT",
   "require": {
     "php": "^7.4",
-    "league/climate": "^3.5"
+    "league/climate": "^3.5",
+    "symfony/dependency-injection": "^4.3",
+    "ext-gd": "*"
   },
   "autoload": {
     "psr-4": {"": "src/"}

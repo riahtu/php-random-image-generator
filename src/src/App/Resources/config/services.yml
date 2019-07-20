@@ -1,0 +1,21 @@
+services:
+  app.utils.outputhandler:
+    class: App\Utils\OutputHandler
+    arguments:
+      - "%app.output.prefix%"
+      - "%app.output.suffix%"
+
+  app.utils.savehandler:
+    class: App\Utils\SaveHandler
+    arguments:
+      - "@vendor.filesystem"
+      - "%app.save.base_path%"
+
+  app.random_image_generator:
+    class: App\RandomImageGenerator
+    arguments:
+      - "@app.utils.outputhandler"
+      - "@app.utils.savehandler"
+
+  vendor.filesystem:
+    class: Symfony\Component\Filesystem\Filesystem

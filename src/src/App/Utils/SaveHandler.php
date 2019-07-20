@@ -31,6 +31,6 @@ class SaveHandler
      */
     public function savePng($image, string $fileName)
     {
-        imagepng($image, $this->basePath . DIRECTORY_SEPARATOR . "$fileName.png");
+        imagepng($image, $this->basePath . "/$fileName.png");
     }
 }

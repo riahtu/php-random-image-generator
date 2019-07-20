@@ -1,0 +1,4 @@
+parameters:
+  app.output.prefix: "test"
+  app.output.suffix: "tset"
+  app.save.base_path: "../out"
