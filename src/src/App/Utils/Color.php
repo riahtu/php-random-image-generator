@@ -5,7 +5,7 @@ namespace App\Utils;
 class Color
 {
     const Black	= "\e[0;30m";
-    const Dark_Grey	= "\e[1;30m";
+    const DGrey	= "\e[1;30m";
     const Red = "\e[0;31m";
     const LRed = "\e[1;31m";
     const Green	= "\e[0;32m";

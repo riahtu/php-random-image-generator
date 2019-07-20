@@ -10,19 +10,32 @@ class OutputHandler
     protected string $outputPrefix;
     /** @var string $outputSuffix */
     protected string $outputSuffix;
+    /** @var string $timeFormat */
+    protected string $timeFormat;
+    /** @var string $timeSeparator */
+    protected string $timeSeparator;
 
     /**
      * @param string $outputPrefix
      * @param string $outputSuffix
+     * @param string $timeFormat
+     * @param string $timeSeparator
      */
-    public function __construct(string $outputPrefix = "", string $outputSuffix = "")
-    {
+    public function __construct(
+        string $outputPrefix = "",
+        string $outputSuffix = "",
+        string $timeFormat = "H:i:s",
+        string $timeSeparator = ""
+    ) {
         $this->outputPrefix = $outputPrefix;
         $this->outputSuffix = $outputSuffix;
+        $this->timeFormat = $timeFormat;
+        $this->timeSeparator = $timeSeparator;
     }
 
     /**
      * @param string $line
+     * @throws \Exception
      */
     public function outputLine(string $line): void
     {
@@ -31,6 +44,7 @@ class OutputHandler
 
     /**
      * @param string $line
+     * @throws \Exception
      */
     public function outputSuccess(string $line): void
     {
@@ -39,6 +53,7 @@ class OutputHandler
 
     /**
      * @param string $error
+     * @throws \Exception
      */
     public function outputError(string $error): void
     {
@@ -48,9 +63,11 @@ class OutputHandler
     /**
      * @param string $line
      * @return string
+     * @throws \Exception
      */
     protected function getFormattedLine(string $line): string
     {
-        return $this->outputPrefix . $line . $this->outputSuffix;
+        return $this->outputPrefix . (new \DateTime())->format($this->timeFormat)
+            . $this->timeSeparator . $line . $this->outputSuffix;
     }
 }

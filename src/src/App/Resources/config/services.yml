@@ -4,6 +4,8 @@ services:
     arguments:
       - "%app.output.prefix%"
       - "%app.output.suffix%"
+      - "%app.output.time_format%"
+      - "%app.output.time_separator%"
 
   app.utils.savehandler:
     class: App\Utils\SaveHandler

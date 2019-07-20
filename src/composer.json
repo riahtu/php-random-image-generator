@@ -8,7 +8,9 @@
     "php": "^7.4",
     "league/climate": "^3.5",
     "symfony/dependency-injection": "^4.3",
-    "ext-gd": "*"
+    "ext-gd": "*",
+    "symfony/config": "^4.3",
+    "symfony/yaml": "^4.3"
   },
   "autoload": {
     "psr-4": {"": "src/"}
