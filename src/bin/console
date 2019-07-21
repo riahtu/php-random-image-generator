@@ -2,6 +2,7 @@
 <?php declare(strict_types=1);
 
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Console\Application;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
@@ -12,6 +13,9 @@ $loader = new YamlFileLoader($containerBuilder, new FileLocator(__DIR__ . "/../"
 $loader->load('config.yml', 'yml');
 $loader->load('services.yml', 'yml');
 
-$app = $containerBuilder->get('app.random_image_project');
+$application = new Application();
+$application->addCommands([
+    $containerBuilder->get('app.command.generate_random_image')
+]);
 
-$app->generate(600, 600);
+$application->run();

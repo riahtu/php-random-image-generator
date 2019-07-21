@@ -1,30 +1,17 @@
 services:
-  app.utils.outputhandler:
-    class: App\Utils\OutputHandler
-    arguments:
-      - "@app.utils.clock"
-      - "%app.output.prefix%"
-      - "%app.output.suffix%"
-      - "%app.output.time_format%"
-      - "%app.output.time_separator%"
-
   app.utils.savehandler:
     class: App\Utils\SaveHandler
     arguments:
       - "@vendor.filesystem"
       - "%app.save.base_path%"
 
-  app.utils.clock:
-    class: App\Utils\Clock
-
   app.service.randomimagegenerator:
     class: App\Service\RandomImageGenerator
 
-  app.random_image_project:
-    class: App\RandomImageProject
+  app.command.generate_random_image:
+    class: App\Command\GenerateRandomImageCommand
     arguments:
       - "@app.service.randomimagegenerator"
-      - "@app.utils.outputhandler"
       - "@app.utils.savehandler"
       - "%app.save.prefix%"
 
