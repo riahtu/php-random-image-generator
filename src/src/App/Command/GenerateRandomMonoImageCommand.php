@@ -12,10 +12,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class GenerateRandomImageCommand extends Command
+class GenerateRandomMonoImageCommand extends Command
 {
     /** @var string $defaultName */
-    protected static $defaultName = "img:create:random";
+    protected static $defaultName = "img:create:mono";
 
     /** @var ImageGeneratorInterface $generator */
     protected ImageGeneratorInterface $generator;
@@ -42,10 +42,17 @@ class GenerateRandomImageCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setDescription("Generate a random image")
-            ->setHelp("This command allows you to create a random image")
+            ->setDescription("Generate a random image with only one color")
+            ->setHelp("This command allows you to create a random image with only one color")
             ->setDefinition(
                 new InputDefinition([
+                    new InputOption(
+                        "color",
+                        "C",
+                        InputOption::VALUE_REQUIRED,
+                        "R, G or B depending on whether you want red, green or blue. Defaults to blue.",
+                        'B'
+                    ),
                     new InputOption(
                         "output",
                         "O",
@@ -89,12 +96,13 @@ class GenerateRandomImageCommand extends Command
         $height = intval($input->getOption('height'));
         $fileName = $input->getOption('output');
         $fileType = $input->getOption('type');
+        $color = strtoupper($input->getOption('color'));
 
-        $output->writeln("Generating image with width $width and height $height");
+        $output->writeln("Generating image with width $width and height $height and color $color");
 
         $image = imagecreatetruecolor($width, $height);
 
-        $image = $this->generator->generateImage($image, $width, $height);
+        $image = $this->generator->generateImage($image, $width, $height, ['color' => $color]);
 
         $image = (new GeneratedImage())
             ->setFileName($fileName)

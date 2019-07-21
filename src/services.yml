@@ -8,12 +8,20 @@ services:
   app.service.randomimagegenerator:
     class: App\Service\RandomImageGenerator
 
+  app.service.randommonoimagegenerator:
+    class: App\Service\RandomMonoImageGenerator
+
   app.command.generate_random_image:
     class: App\Command\GenerateRandomImageCommand
     arguments:
       - "@app.service.randomimagegenerator"
       - "@app.utils.savehandler"
-      - "%app.save.prefix%"
+
+  app.command.generate_random_mono_image:
+    class: App\Command\GenerateRandomMonoImageCommand
+    arguments:
+      - "@app.service.randommonoimagegenerator"
+      - "@app.utils.savehandler"
 
   vendor.filesystem:
     class: Symfony\Component\Filesystem\Filesystem

@@ -15,7 +15,8 @@ $loader->load('services.yml', 'yml');
 
 $application = new Application();
 $application->addCommands([
-    $containerBuilder->get('app.command.generate_random_image')
+    $containerBuilder->get('app.command.generate_random_image'),
+    $containerBuilder->get('app.command.generate_random_mono_image'),
 ]);
 
 $application->run();

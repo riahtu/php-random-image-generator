@@ -8,10 +8,11 @@ class RandomImageGenerator implements ImageGeneratorInterface
      * @param resource $resource
      * @param int $width
      * @param int $height
+     * @param array $options
      * @return resource
      * @throws \Exception
      */
-    public function generateImage($resource, int $width, int $height)
+    public function generateImage($resource, int $width, int $height, array $options = [])
     {
         for ($x = 0; $x < $width; $x++) {
             for ($y = 0; $y < $height; $y++) {
