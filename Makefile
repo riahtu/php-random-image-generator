@@ -1,5 +1,7 @@
 SHELL := /bin/sh
 
+MAKEFLAGS := --silent --ignore-errors --no-print-directory
+
 .DEFAULT_GOAL := help
 
 # TODO: Add version to images
@@ -8,7 +10,7 @@ help:
 	@echo "Please use 'make <target>' where <target> is one of"
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z\._-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-run: ## Run a command in the application, like: make run cmd=<command>
+run: ## Run a command in the application, usage: make run cmd=<command>
 	@docker run --rm --workdir=/app -v $(CURDIR):/app survivorbat/random-image-generator /app/src/bin/console ${cmd}
 
 shell: ## Enter the shell to use php commands
@@ -17,7 +19,7 @@ shell: ## Enter the shell to use php commands
 install: ## Install the dependencies with a throwaway docker container
 	@docker run --rm -u php --entrypoint=/usr/bin/composer -v ${CURDIR}/src:/app survivorbat/random-image-generator install
 
-cs-fixer: ## Run php-cs-fixer on the source code
+cs-fixer: ## Run php-cs-fixer on the source code (not supported yet)
 	@docker run --rm -u php -v ${CURDIR}/src:/app survivorbat/random-image-generator vendor/bin/php-cs-fixer fix src/
 
 phpstan: ## Run phpstan on the source code

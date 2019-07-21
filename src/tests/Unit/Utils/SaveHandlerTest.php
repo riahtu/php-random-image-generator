@@ -40,7 +40,8 @@ class SaveHandlerTest extends TestCase
 
         $image = (new GeneratedImage())
             ->setResource($image)
-            ->setFileName($imageName);
+            ->setFileName($imageName)
+            ->setFileType('png');
 
         $saveHandler->savePng($image);
 

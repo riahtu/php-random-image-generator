@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Entity\GeneratedImage;
+use App\Exception\FileTypeNotSupportedException;
 use App\Service\ImageGeneratorInterface;
 use App\Utils\SaveHandler;
 use Symfony\Component\Console\Command\Command;
@@ -50,10 +51,27 @@ class GenerateRandomImageCommand extends Command
             ->setHelp("This command allows you to create a random image")
             ->setDefinition(
                 new InputDefinition([
-                    new InputOption("width", "w", InputOption::VALUE_OPTIONAL),
-                    new InputOption("height", "h", InputOption::VALUE_OPTIONAL),
-                    new InputOption("output-location", "o", InputOption::VALUE_OPTIONAL),
-                    new InputOption("output-type", "ot", InputOption::VALUE_OPTIONAL)
+                    new InputOption(
+                        "width",
+                        "W",
+                        InputOption::VALUE_OPTIONAL,
+                        "Width of the image",
+                        200
+                    ),
+                    new InputOption(
+                        "height",
+                        "H",
+                        InputOption::VALUE_OPTIONAL,
+                        "Height of the image",
+                        200
+                    ),
+                    new InputOption(
+                        "output-type",
+                        "o",
+                        InputOption::VALUE_OPTIONAL,
+                        "Output type (png, bmp, gif)",
+                        "png"
+                    )
                 ])
             );
     }
@@ -61,12 +79,15 @@ class GenerateRandomImageCommand extends Command
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @return void
+     * @return int
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $width = 200;
-        $height = 200;
+        $width = intval($input->getOption('width'));
+        $height = intval($input->getOption('height'));
+        $fileType = $input->getOption('output-type');
+
+        $output->writeln("Generating image with width $width and height $height");
 
         $image = imagecreatetruecolor($width, $height);
 
@@ -77,8 +98,21 @@ class GenerateRandomImageCommand extends Command
         $image = (new GeneratedImage())
             ->setFileName($fileName)
             ->setResource($image)
-            ->setFileType('png');
+            ->setFileType($fileType);
 
-        $this->sh->savePng($image);
+        $output->writeln("Saving file as $fileName");
+
+
+        try {
+            $this->sh->save($image);
+        }
+        catch (FileTypeNotSupportedException $exception) {
+            $output->writeln("File type $fileType is not supported");
+            return 1;
+        }
+
+        imagedestroy($image->getResource());
+
+        return 0;
     }
 }

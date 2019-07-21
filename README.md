@@ -21,13 +21,18 @@ Setting up the application is as easy as:
 
 ## Plans for the future
 
+- ~~Add image dimensions to CLI~~
+- ~~Add more image output types~~
+- ~~Perhaps add symfony/console for easier command line management~~
 - Add extra parameters to allow user to influence the end result of the image (make a more red, green or blue image result)
 - Add xdebug for generating coverage reports
-- Add image dimensions to CLI
-- Add more image output types
+- Add more tests
+- Add jpeg and webp output types
+- Add more generators
+- Add more output formatting
+~ Make sure php-cs-fixer works with 7.4
 - Create a docker image of the application itself (perhaps)
-- Perhaps add symfony/console for easier command line management
 
 ## Known quirks
 
-- None yet!
+- Php-cs-fixer is not supported for 7.4 yet
