@@ -21,22 +21,17 @@ class GenerateRandomImageCommand extends Command
     protected ImageGeneratorInterface $generator;
     /** @var SaveHandler $sh */
     protected SaveHandler $sh;
-    /** @var string $imageFilenamePrefix */
-    protected string $imageFilenamePrefix;
 
     /**
      * @param ImageGeneratorInterface $generator
      * @param SaveHandler $sh
-     * @param string $imageFilenamePrefix
      */
     public function __construct(
         ImageGeneratorInterface $generator,
-        SaveHandler $sh,
-        string $imageFilenamePrefix = "gen_"
+        SaveHandler $sh
     ) {
         $this->generator = $generator;
         $this->sh = $sh;
-        $this->imageFilenamePrefix = $imageFilenamePrefix;
 
         parent::__construct();
     }
@@ -52,6 +47,13 @@ class GenerateRandomImageCommand extends Command
             ->setDefinition(
                 new InputDefinition([
                     new InputOption(
+                        "output",
+                        "O",
+                        InputOption::VALUE_OPTIONAL,
+                        "Output name of the image",
+                        "gen_" . uniqid()
+                    ),
+                    new InputOption(
                         "width",
                         "W",
                         InputOption::VALUE_OPTIONAL,
@@ -66,8 +68,8 @@ class GenerateRandomImageCommand extends Command
                         200
                     ),
                     new InputOption(
-                        "output-type",
-                        "o",
+                        "type",
+                        "T",
                         InputOption::VALUE_OPTIONAL,
                         "Output type (png, bmp, gif)",
                         "png"
@@ -85,7 +87,8 @@ class GenerateRandomImageCommand extends Command
     {
         $width = intval($input->getOption('width'));
         $height = intval($input->getOption('height'));
-        $fileType = $input->getOption('output-type');
+        $fileName = $input->getOption('output');
+        $fileType = $input->getOption('type');
 
         $output->writeln("Generating image with width $width and height $height");
 
@@ -93,15 +96,12 @@ class GenerateRandomImageCommand extends Command
 
         $image = $this->generator->generateImage($image, $width, $height);
 
-        $fileName = $this->imageFilenamePrefix . uniqid();
-
         $image = (new GeneratedImage())
             ->setFileName($fileName)
             ->setResource($image)
             ->setFileType($fileType);
 
-        $output->writeln("Saving file as $fileName");
-
+        $output->writeln("Saving file as $fileName.$fileType");
 
         try {
             $this->sh->save($image);

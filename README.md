@@ -17,7 +17,12 @@ make use of the makefile.
 
 Setting up the application is as easy as:
 1. Run `make install` to install dependencies
-2. Run `make run` to run the application
+2. Run `make run cmd="img:create:random"` to create an image
+
+It might be easier to use the command line of the php container to execute,
+in order to get this working use `make shell`, this will bring you to the
+shell of a running php environment and allows you to use commands in the form
+of: `bin/console list`.
 
 ## Plans for the future
 
