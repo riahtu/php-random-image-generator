@@ -33,3 +33,10 @@ phpstan: ## Run phpstan on the source code
 
 test: ## Run phpunit tests and generate coverage
 	@docker run --rm -u php -v ${CURDIR}:/app survivorbat/random-image-generator src/vendor/bin/phpunit src/tests/
+
+build: ## Build a docker image out of the application, usage: make build tag='<tag>'
+ifndef tag
+	@echo "You need to use this command like: make build tag='<tag>'"
+else
+	@docker build -f docker/random-image-generator/Dockerfile . -t ${tag}
+endif

@@ -10,4 +10,10 @@ RUN apk add --no-cache \
 
 USER php
 
-# TODO: Add labels
+COPY --chown=php:php . /app/
+
+RUN composer install --optimize-autoloader --ignore-platform-reqs --no-interaction --no-suggest \
+    && /app/src/vendor/bin/phpunit /app/src/tests
+
+CMD ["bin/console img:create:random"]
+

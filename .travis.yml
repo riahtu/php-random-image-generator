@@ -1,0 +1,7 @@
+language: sh
+
+services:
+  - docker
+
+script:
+  - docker build . -f docker/random-image-generator/Dockerfile

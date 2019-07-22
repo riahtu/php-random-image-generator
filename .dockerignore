@@ -1,0 +1,8 @@
+.gitignore
+.dockerignore
+Makefile
+README.md
+out/
+docs/
+docker/
+src/vendor
