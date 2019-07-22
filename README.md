@@ -1,5 +1,7 @@
 # PHP Random image generator
 
+[![Build Status](https://travis-ci.com/survivorbat/php-random-image-generator.svg?branch=master)](https://travis-ci.com/survivorbat/php-random-image-generator)
+
 ![Example image](docs/example.png "Example image")
 
 This project came to be after a random thought popped into my head about what would happen
