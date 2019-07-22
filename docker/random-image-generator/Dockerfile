@@ -1,5 +1,7 @@
 FROM survivorbat/php7.4-composer
 
+# TODO: Add multi-stage build (if needed)
+
 USER root
 
 RUN apk add --no-cache \
@@ -12,8 +14,9 @@ USER php
 
 COPY --chown=php:php . /app/
 
-RUN composer install --optimize-autoloader --ignore-platform-reqs --no-interaction --no-suggest \
+RUN composer install -d /app/src --optimize-autoloader --ignore-platform-reqs --no-interaction --no-suggest \
     && /app/src/vendor/bin/phpunit /app/src/tests
 
-CMD ["bin/console img:create:random"]
+WORKDIR /app/src
 
+VOLUME /app/out
