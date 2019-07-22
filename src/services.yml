@@ -16,12 +16,16 @@ services:
     arguments:
       - "@app.service.randomimagegenerator"
       - "@app.utils.savehandler"
+    tags:
+      - command
 
   app.command.generate_random_mono_image:
     class: App\Command\GenerateRandomMonoImageCommand
     arguments:
       - "@app.service.randommonoimagegenerator"
       - "@app.utils.savehandler"
+    tags:
+      - command
 
   vendor.filesystem:
     class: Symfony\Component\Filesystem\Filesystem
