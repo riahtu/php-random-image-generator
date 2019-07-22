@@ -8,15 +8,30 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
+// Get the containers to load our configuration files
 $containerBuilder = new ContainerBuilder();
 $loader = new YamlFileLoader($containerBuilder, new FileLocator(__DIR__ . "/../"));
 $loader->load('config.yml', 'yml');
 $loader->load('services.yml', 'yml');
 
-$application = new Application();
-$application->addCommands([
-    $containerBuilder->get('app.command.generate_random_image'),
-    $containerBuilder->get('app.command.generate_random_mono_image'),
-]);
+// Retrieve all commands from the injector
+$commands = array_keys($containerBuilder->findTaggedServiceIds('command'));
 
-$application->run();
+// Add services to application
+$application = new Application();
+
+foreach ($commands as $commandServiceName) {
+    $application->add(
+            $containerBuilder->get($commandServiceName)
+    );
+}
+
+try {
+    $application->run();
+}
+catch (Exception $e) {
+    echo "An exception or error occurred in the application, the error was:" . PHP_EOL;
+    echo $e->getMessage() . PHP_EOL;
+    echo $e->getTraceAsString() . PHP_EOL;
+    echo "Please contact the creator of this project, the error occured in " . $e->getFile() . PHP_EOL;
+}

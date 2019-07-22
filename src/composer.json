@@ -6,11 +6,11 @@
   "license": "MIT",
   "require": {
     "php": "^7.4",
-    "symfony/dependency-injection": "^4.3",
     "ext-gd": "*",
     "symfony/config": "^4.3",
-    "symfony/yaml": "^4.3",
-    "symfony/console": "^4.3"
+    "symfony/console": "^4.3",
+    "symfony/dependency-injection": "^4.3",
+    "symfony/yaml": "^4.3"
   },
   "autoload": {
     "psr-4": {"": "src/"}

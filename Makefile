@@ -25,7 +25,8 @@ install: ## Install the dependencies with a throwaway docker container
 	@docker run --rm -u php --entrypoint=/usr/bin/composer -v ${CURDIR}/src:/app survivorbat/random-image-generator install
 
 cs-fixer: ## Run php-cs-fixer on the source code (not supported yet)
-	@docker run --rm -u php -v ${CURDIR}/src:/app survivorbat/random-image-generator vendor/bin/php-cs-fixer fix src/
+	@echo "Php-cs-fixer does not yet support php 7.4 unfortunately :("
+	#@docker run --rm -u php -v ${CURDIR}/src:/app survivorbat/random-image-generator vendor/bin/php-cs-fixer fix src/
 
 phpstan: ## Run phpstan on the source code
 	@docker run --rm -u php -v ${CURDIR}/src:/app survivorbat/random-image-generator vendor/bin/phpstan analyze --level=5 -a autoload.php src

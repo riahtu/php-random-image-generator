@@ -40,7 +40,7 @@ class RandomMonoImageGenerator implements ImageGeneratorInterface
     }
 
     /**
-     * @param $resource
+     * @param resource $resource
      * @param string $color
      * @return int
      * @throws \Exception
