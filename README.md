@@ -45,14 +45,12 @@ of: `console list`.
 - ~~Add more image output types~~
 - ~~Perhaps add symfony/console for easier command line management~~
 - ~~Create a docker image of the application itself~~
-- Add extra parameters to allow user to influence the end result of the image (make a more red, green or blue image result)
 - Add xdebug for generating coverage reports
 - Add more tests
-- Add a phpunit xml file with testsuites``
+- Add a phpunit xml file with testsuites
 - Add jpeg and webp output types
 - Add more generators
 - Add more output formatting
-~ Make sure php-cs-fixer works with 7.4
 
 ## Known quirks
 
