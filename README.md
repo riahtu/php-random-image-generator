@@ -20,7 +20,9 @@ make use of the makefile.
 ### Docker image
 
 Using the application is as easy as:
-1. Run `docker run --rm -u php -v $(pwd):/app/out survivorbat/random-image-generator:v0.3 console img:create:random`
+1. Create a directory for the images `mkdir random-images`
+2. Go into that directory with `cd random-images`
+3. Run `docker run --rm -u php -v $(pwd):/app/out survivorbat/random-image-generator:v0.3 console img:create:random`
 
 Afterwards you should find a random image in your working directory.
 Alternatively you can open the shell by using:
@@ -45,6 +47,8 @@ of: `console list`.
 - ~~Add more image output types~~
 - ~~Perhaps add symfony/console for easier command line management~~
 - ~~Create a docker image of the application itself~~
+- ~~Fix the file path so that you don't need to use src/bin/console but console in commands~~
+- Add extra parameters to allow user to influence the end result of the image (make a more red, green or blue image result)
 - Add xdebug for generating coverage reports
 - Add more tests
 - Add a phpunit xml file with testsuites
