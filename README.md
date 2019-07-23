@@ -20,12 +20,12 @@ make use of the makefile.
 ### Docker image
 
 Using the application is as easy as:
-1. Run `docker run --rm -u php -v $(pwd):/app/out survivorbat/random-image-generator:v1.0 bin/console img:create:random`
+1. Run `docker run --rm -u php -v $(pwd):/app/out survivorbat/random-image-generator:v0.3 console img:create:random`
 
 Afterwards you should find a random image in your working directory.
 Alternatively you can open the shell by using:
 
-`docker run --entrypoint=/bin/sh --rm -it -u php -v $(pwd):/app/out survivorbat/random-image-generator:v0.1`
+`docker run --entrypoint=/bin/sh --rm -it -u php -v $(pwd):/app/out survivorbat/random-image-generator:v0.3`
 
 ### Download source
 
@@ -37,7 +37,7 @@ Setting up the application is as easy as:
 It might be easier to use the command line of the php container to execute,
 in order to get this working use `make shell`, this will bring you to the
 shell of a running php environment and allows you to use commands in the form
-of: `bin/console list`.
+of: `console list`.
 
 ## Plans for the future
 
