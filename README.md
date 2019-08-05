@@ -1,5 +1,6 @@
 # PHP Random image generator
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3a5a1ef10ca74cfda8805040b40bb792)](https://app.codacy.com/app/survivorbat/php-random-image-generator?utm_source=github.com&utm_medium=referral&utm_content=survivorbat/php-random-image-generator&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.com/survivorbat/php-random-image-generator.svg?branch=master)](https://travis-ci.com/survivorbat/php-random-image-generator)
 
 ![Example image](docs/example.png "Example image")
